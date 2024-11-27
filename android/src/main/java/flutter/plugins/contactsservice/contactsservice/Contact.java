@@ -9,9 +9,6 @@ public class Contact implements Comparable<Contact> {
         this.identifier = id;
     }
 
-    private Contact() {
-    }
-
     String identifier;
     String displayName, givenName, middleName, familyName, prefix, suffix, company, jobTitle, note, birthday, androidAccountType, androidAccountName;
     ArrayList<Item> emails = new ArrayList<>();
@@ -55,44 +52,6 @@ public class Contact implements Comparable<Contact> {
         contactMap.put("postalAddresses", addressesMap);
 
         return contactMap;
-    }
-
-    @SuppressWarnings("unchecked")
-    static Contact fromMap(HashMap map) {
-        Contact contact = new Contact();
-        contact.identifier = (String) map.get("identifier");
-        contact.givenName = (String) map.get("givenName");
-        contact.middleName = (String) map.get("middleName");
-        contact.familyName = (String) map.get("familyName");
-        contact.prefix = (String) map.get("prefix");
-        contact.suffix = (String) map.get("suffix");
-        contact.company = (String) map.get("company");
-        contact.jobTitle = (String) map.get("jobTitle");
-        contact.avatar = (byte[]) map.get("avatar");
-        contact.note = (String) map.get("note");
-        contact.birthday = (String) map.get("birthday");
-        contact.androidAccountType = (String) map.get("androidAccountType");
-        contact.androidAccountName = (String) map.get("androidAccountName");
-
-        ArrayList<HashMap> emails = (ArrayList<HashMap>) map.get("emails");
-        if (emails != null) {
-            for (HashMap email : emails) {
-                contact.emails.add(Item.fromMap(email));
-            }
-        }
-        ArrayList<HashMap> phones = (ArrayList<HashMap>) map.get("phones");
-        if (phones != null) {
-            for (HashMap phone : phones) {
-                contact.phones.add(Item.fromMap(phone));
-            }
-        }
-        ArrayList<HashMap> postalAddresses = (ArrayList<HashMap>) map.get("postalAddresses");
-        if (postalAddresses != null) {
-            for (HashMap postalAddress : postalAddresses) {
-                contact.postalAddresses.add(PostalAddress.fromMap(postalAddress));
-            }
-        }
-        return contact;
     }
 
     @Override
