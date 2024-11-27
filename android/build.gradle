@@ -1,3 +1,5 @@
+
+
 group 'flutter.plugins.contactsservice.contactsservice'
 version '1.0-SNAPSHOT'
 
@@ -8,7 +10,8 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:4.0.1'
+        // Updated Gradle plugin version
+        classpath 'com.android.tools.build:gradle:8.1.4'
     }
 }
 
@@ -22,21 +25,35 @@ rootProject.allprojects {
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 30
+    namespace 'flutter.plugins.contactsservice.contactsservice' // NEW: Specify the namespace
+
+    compileSdk 34
 
     defaultConfig {
-        minSdkVersion 16
-        targetSdkVersion 30
+        minSdkVersion 21 // Updated minimum SDK version
+        targetSdkVersion 35 // Updated target SDK version
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
     }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
     lintOptions {
         disable 'InvalidPackage'
     }
 }
 
 dependencies {
-    testImplementation 'junit:junit:4.12'
-    testImplementation 'com.google.truth:truth:1.0'
+    // Testing dependencies
+    testImplementation 'junit:junit:4.13.2' // Updated JUnit version
+    testImplementation 'com.google.truth:truth:1.1.5' // Updated Truth version
+
+    // AndroidX Test Libraries
+    androidTestImplementation 'androidx.test:runner:1.6.2'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.6.1'
 }
